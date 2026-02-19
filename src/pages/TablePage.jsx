@@ -33,13 +33,13 @@ export default function TablePage() {
     const filteredRows = rows.filter((row) => {
         if (!searchQuery) return true;
         const query = searchQuery.toLowerCase();
-        const username = row.email.split('@')[0];
+        const username = (row.email || '').split('@')[0];
         return (
             String(row.id).toLowerCase().includes(query) ||
-            row.name.toLowerCase().includes(query) ||
-            row.email.toLowerCase().includes(query) ||
+            (row.name || '').toLowerCase().includes(query) ||
+            (row.email || '').toLowerCase().includes(query) ||
             username.toLowerCase().includes(query) ||
-            row.role.toLowerCase().includes(query)
+            (row.role || '').toLowerCase().includes(query)
         );
     });
 
@@ -52,7 +52,7 @@ export default function TablePage() {
                 <TextField
                     fullWidth
                     variant="outlined"
-                    placeholder="Search across all columns..."
+                    placeholder="Search by ID, Name, Email, Username, or Role..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     InputProps={{
