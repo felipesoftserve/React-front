@@ -35,6 +35,7 @@ export default function TablePage() {
                             <TableCell>ID</TableCell>
                             <TableCell>Name</TableCell>
                             <TableCell>Email</TableCell>
+                            <TableCell>Username</TableCell>
                             <TableCell>Role</TableCell>
                             <TableCell>Status</TableCell>
                         </TableRow>
@@ -50,6 +51,7 @@ export default function TablePage() {
                                 </TableCell>
                                 <TableCell>{row.name}</TableCell>
                                 <TableCell>{row.email}</TableCell>
+                                <TableCell>{row.email.split('@')[0]}</TableCell>
                                 <TableCell>{row.role}</TableCell>
                                 <TableCell>
                                     <Chip
