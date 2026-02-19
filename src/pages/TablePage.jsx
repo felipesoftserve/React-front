@@ -39,8 +39,7 @@ export default function TablePage() {
             row.name.toLowerCase().includes(query) ||
             row.email.toLowerCase().includes(query) ||
             username.toLowerCase().includes(query) ||
-            row.role.toLowerCase().includes(query) ||
-            row.status.toLowerCase().includes(query)
+            row.role.toLowerCase().includes(query)
         );
     });
 
