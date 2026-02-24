@@ -9,7 +9,7 @@ import {
     Toolbar,
     Divider
 } from '@mui/material';
-import { TableChart, Input } from '@mui/icons-material';
+import { TableChart } from '@mui/icons-material';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 const drawerWidth = 240;
@@ -20,7 +20,6 @@ export default function Sidebar({ mobileOpen = false, handleDrawerToggle }) {
 
     const menuItems = [
         { text: 'Table View', icon: <TableChart />, path: '/table' },
-        { text: 'Form View', icon: <Input />, path: '/form' },
     ];
 
     const drawerContent = (

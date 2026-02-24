@@ -11,9 +11,15 @@ import {
     Chip,
     TextField,
     InputAdornment,
-    Box
+    Box,
+    Button,
+    Dialog,
+    DialogTitle,
+    DialogContent
 } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
+import AddIcon from '@mui/icons-material/Add';
+import FormPage from './FormPage';
 
 const createData = (id, name, email, role, status) => {
     return { id, name, email, role, status };
@@ -29,6 +35,7 @@ const rows = [
 
 export default function TablePage() {
     const [searchQuery, setSearchQuery] = useState('');
+    const [isFormOpen, setIsFormOpen] = useState(false);
 
     const filteredRows = rows.filter((row) => {
         if (!searchQuery) return true;
@@ -48,7 +55,7 @@ export default function TablePage() {
             <Typography variant="h4" gutterBottom>
                 User Management
             </Typography>
-            <Box sx={{ mb: 2 }}>
+            <Box sx={{ mb: 2, display: 'flex', gap: 2, alignItems: 'center' }}>
                 <TextField
                     fullWidth
                     variant="outlined"
@@ -63,6 +70,13 @@ export default function TablePage() {
                         ),
                     }}
                 />
+                <Button
+                    variant="contained"
+                    startIcon={<AddIcon />}
+                    onClick={() => setIsFormOpen(true)}
+                >
+                    Add
+                </Button>
             </Box>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="user table">
@@ -111,6 +125,17 @@ export default function TablePage() {
                     </TableBody>
                 </Table>
             </TableContainer>
+            <Dialog
+                open={isFormOpen}
+                onClose={() => setIsFormOpen(false)}
+                maxWidth="sm"
+                fullWidth
+            >
+                <DialogTitle>Add New User</DialogTitle>
+                <DialogContent>
+                    <FormPage onSubmitSuccess={() => setIsFormOpen(false)} />
+                </DialogContent>
+            </Dialog>
         </>
     );
 }
