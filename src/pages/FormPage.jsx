@@ -3,8 +3,6 @@ import {
     Box,
     TextField,
     Button,
-    Typography,
-    Paper,
     Grid,
     MenuItem,
     Checkbox,
@@ -19,7 +17,7 @@ const roles = [
     { value: 'Editor', label: 'Editor' },
 ];
 
-export default function FormPage() {
+export default function FormPage({ onSubmitSuccess }) {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -41,6 +39,9 @@ export default function FormPage() {
         // Simulate form submission
         console.log('Form Submitted:', formData);
         setOpen(true);
+        if (onSubmitSuccess) {
+            onSubmitSuccess(formData);
+        }
     };
 
     const handleClose = (event, reason) => {
@@ -52,11 +53,7 @@ export default function FormPage() {
 
     return (
         <Box component="form" onSubmit={handleSubmit} noValidate>
-            <Typography variant="h4" gutterBottom>
-                Add New User
-            </Typography>
-            <Paper sx={{ p: 4, maxWidth: 600 }}>
-                <Grid container spacing={3}>
+            <Grid container spacing={3}>
                     <Grid item xs={12}>
                         <TextField
                             required
@@ -112,16 +109,12 @@ export default function FormPage() {
                     </Grid>
                     <Grid item xs={12}>
                         <Box sx={{ display: 'flex', gap: 2, justifyContent: 'flex-end', mt: 2 }}>
-                            <Button variant="outlined" color="secondary">
-                                Cancel
-                            </Button>
                             <Button type="submit" variant="contained" color="primary">
                                 Save User
                             </Button>
                         </Box>
                     </Grid>
                 </Grid>
-            </Paper>
             <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                 <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
                     User created successfully!
